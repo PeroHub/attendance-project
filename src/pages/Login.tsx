@@ -21,7 +21,7 @@ const Login = () => {
     console.log(email);
     try {
       // Replace with your API endpoint
-      const response = await fetch('http://localhost:5000/api/check-in', {
+      const response = await fetch('https://staff-attendance-d4tr.onrender.com/api/check-in', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

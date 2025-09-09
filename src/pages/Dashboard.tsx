@@ -15,9 +15,14 @@ interface AttendanceRecord {
 }
 
 const Dashboard = () => {
-  const [user, setUser] = useState<any>(null);
+  interface User {
+    name: string;
+    email: string | null;
+  }
+
+  const [user, setUser] = useState<User | null>(null);
   const [isCheckedIn, setIsCheckedIn] = useState(false);
-  const [currentSession, setCurrentSession] = useState<any>(null);
+  const [currentSession, setCurrentSession] = useState<AttendanceRecord | null>(null);
   const [recentRecords, setRecentRecords] = useState<AttendanceRecord[]>([]);
   const [loading, setLoading] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -116,7 +121,7 @@ const Dashboard = () => {
   const handleCheckOut = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/check-out', {
+      const response = await fetch('https://staff-attendance-d4tr.onrender.com/api/check-out', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

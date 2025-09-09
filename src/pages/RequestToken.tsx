@@ -19,7 +19,7 @@ const RequestToken = () => {
     setLoading(true);
     try {
       // Replace with your API endpoint
-      const response = await fetch('http://localhost:5000/api/request-token', {
+      const response = await fetch('https://staff-attendance-d4tr.onrender.com/api/request-token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
