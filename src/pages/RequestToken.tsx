@@ -72,7 +72,7 @@ const RequestToken = () => {
                   <div className="bg-warning/10 p-3 rounded-lg">
                     <div className="flex items-center space-x-2 text-warning">
                       <Clock className="w-4 h-4" />
-                      <span className="text-sm font-medium">Token expires in 10 minutes</span>
+                      <span className="text-sm font-medium">Token expires in 5 minutes</span>
                     </div>
                   </div>
                 </div>
@@ -131,7 +131,7 @@ const RequestToken = () => {
               <div className="text-center text-sm text-muted-foreground space-y-2">
                 <p className="flex items-center justify-center space-x-2">
                   <Clock className="w-4 h-4" />
-                  <span>Tokens expire after 10 minutes</span>
+                  <span>Tokens expire after 5 minutes</span>
                 </p>
                 <p>For security, only registered staff emails are accepted</p>
               </div>
