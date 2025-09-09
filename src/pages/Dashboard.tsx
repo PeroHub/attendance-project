@@ -173,7 +173,7 @@ const Dashboard = () => {
         {/* User Welcome Section */}
         <Card className="bg-gradient-card shadow-card">
           <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
+            <div className="md:flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
                   <User className="w-6 h-6 text-primary-foreground" />
@@ -183,7 +183,7 @@ const Dashboard = () => {
                   {/* <p className="text-muted-foreground">{user.email}</p> */}
                 </div>
               </div>
-              <div className="text-right">
+              <div className="text-right mt-6 md:mt-0">
                 <p className="text-2xl font-bold text-foreground">
                   {currentTime.toLocaleTimeString('en-US', {
                     hour12: true,
