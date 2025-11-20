@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import StaffListComponent from './StaffList';
 
 // Self-contained UI components to avoid external imports
 const Button = ({ children, className = '', ...props }) => <button className={`px-4 flex items-center justify-center py-2 font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`} {...props}>{children}</button>;
@@ -122,15 +123,21 @@ const AdminDashboard = () => {
   const [attendanceRecords, setAttendanceRecords] = useState<AttendanceRecord[]>([]);
   const [errorAddStaff, setErrorAddStaff] = useState('');
   const [totalStaff, setTotalStaff] = useState(0);
+  const [staffData, setStaffData] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [toggleTable, setToggleTable] = useState('records');
   const [newStaffForm, setNewStaffForm] = useState({
     firstName: '',
     lastName: '',
     email: ''
   });
   const { toast } = useToast();
+
+  const handleTabChange = (tab) => {
+    setToggleTable(tab);
+  }
 
   useEffect(() => {
     // Check admin authentication - dummy check for demonstration
@@ -171,7 +178,8 @@ const AdminDashboard = () => {
 
      totalStaffResponse.json().then(data => {
       setTotalStaff(data.totalStaff || 0);
-      // console.log(data, "total staff");
+      setStaffData(data || null);
+      console.log(data, "total staff");
      })
 
       if (response.ok) {
@@ -283,6 +291,8 @@ const AdminDashboard = () => {
     window.location.href = '/admin/login';
   };
 
+  console.log(toggleTable, "toggleTable");
+
   return (
     <Layout title="Admin Dashboard" subtitle="Manage staff and monitor attendance">
       <div className="space-y-6">
@@ -293,17 +303,19 @@ const AdminDashboard = () => {
         </div>
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card className="bg-gradient-card shadow-card">
-            <CardContent>
-              <div className="flex items-center space-x-2">
-                <Users />
-                <div>
-                  <p className="text-2xl font-bold">{totalStaff}</p>
-                  <p className="text-sm text-gray-500">Total Staff</p>
+          <div onClick={() => handleTabChange('staff')} className='cursor-pointer'>
+            <Card className="bg-gradient-card shadow-card" >
+              <CardContent>
+                <div className="flex items-center space-x-2">
+                  <Users />
+                  <div>
+                    <p className="text-2xl font-bold">{totalStaff}</p>
+                    <p className="text-sm text-gray-500">Total Staff</p>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* <Card className="bg-gradient-card shadow-card">
             <CardContent>
@@ -317,17 +329,20 @@ const AdminDashboard = () => {
             </CardContent>
           </Card> */}
 
-          <Card className="bg-gradient-card shadow-card">
-            <CardContent>
-              <div className="flex items-center space-x-2">
-                <Calendar />
-                <div>
-                  <p className="text-2xl font-bold">{attendanceRecords.length}</p>
-                  <p className="text-sm text-gray-500">Total Records</p>
+          <div onClick={() => handleTabChange('records')} className='cursor-pointer'>
+
+            <Card className="bg-gradient-card shadow-card">
+              <CardContent>
+                <div className="flex items-center space-x-2">
+                  <Calendar />
+                  <div>
+                    <p className="text-2xl font-bold">{attendanceRecords.length}</p>
+                    <p className="text-sm text-gray-500">Total Records</p>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* <Card className="bg-gradient-card shadow-card">
             <CardContent>
@@ -343,6 +358,11 @@ const AdminDashboard = () => {
         </div>
 
         {/* Attendance Records Card */}
+        <Card>
+          {toggleTable === 'staff' ? 
+            <StaffListComponent staffDataP={staffData} />
+          :
+          
         <Card>
           <CardHeader>
             <div className="md:flex items-center justify-between">
@@ -402,6 +422,8 @@ const AdminDashboard = () => {
               </TableBody>
             </Table>
           </CardContent>
+        </Card>
+          }
         </Card>
       </div>
 
