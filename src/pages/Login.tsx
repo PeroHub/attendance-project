@@ -32,9 +32,10 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data, "login response data");
         // Store user session data
-        localStorage.setItem('userToken', data.sessionToken);
-        localStorage.setItem('userId', data.userId);
+        localStorage.setItem('userToken', JSON.stringify(data.token));
+        localStorage.setItem('userId', data.user);
         
         toast({
           title: "Login successful!",
