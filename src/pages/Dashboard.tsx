@@ -32,7 +32,7 @@ const Dashboard = () => {
     // Check if user is logged in
     const email = localStorage.getItem('email');
     setUser({ name: 'User', email }); // Placeholder, replace with actual user data
-    const userId = localStorage.getItem('userId');
+    // const userId = localStorage.getItem('userId');
     
     if (!email) {
       window.location.href = '/';
@@ -56,7 +56,7 @@ const Dashboard = () => {
     try {
       const response = await fetch('/api/user-status', {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
+          'Authorization': `Bearer ${JSON.parse(localStorage.getItem('userToken') || '')}`,
         },
       });
       
@@ -75,7 +75,7 @@ const Dashboard = () => {
     try {
       const response = await fetch('/api/attendance-records', {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
+          'Authorization': `Bearer ${JSON.parse(localStorage.getItem('userToken') || '')}`,
         },
       });
       
@@ -124,7 +124,8 @@ const Dashboard = () => {
       const response = await fetch('https://staff-attendance-d4tr.onrender.com/api/check-out', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/json',
+          'Authorization': `Bearer ${JSON.parse(localStorage.getItem('userToken') || '')}`
         },
       });
 
@@ -134,7 +135,7 @@ const Dashboard = () => {
         setCurrentSession(null);
         toast({
           title: "Checked out successfully!",
-          description: `Total time worked: ${data.duration}`,
+          // description: `Total time worked: ${data.duration}`,
         });
         fetchAttendanceRecords(); // Refresh records
       }
@@ -149,9 +150,10 @@ const Dashboard = () => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('email');
-    // localStorage.removeItem('userId');
+  const handleLogout = async () => {
+    await handleCheckOut()
+    localStorage.removeItem('user');
+    localStorage.removeItem('userId');
     window.location.href = '/';
   };
 

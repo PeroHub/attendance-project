@@ -185,9 +185,9 @@ const AdminDashboard = () => {
       if (response.ok) {
         const data = await response.json();
         const formattedRecords = data.map(record => {
-          const staffName = `${record.userId.firstName} ${record.userId.lastName}`;
-          const duration = record.totalHoursWorked ? formatDuration(record.totalHoursWorked) : undefined;
-          const checkOut = record.checkOutTime ? formatTime(record.checkOutTime) : undefined;
+          const staffName = `${record?.userId?.firstName} ${record?.userId?.lastName}`;
+          const duration = record.totalHoursWorked ? formatDuration(record?.totalHoursWorked) : undefined;
+          const checkOut = record.checkOutTime ? formatTime(record?.checkOutTime) : undefined;
           
           return {
             id: record._id,
