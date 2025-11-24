@@ -72,7 +72,7 @@ const RequestToken = () => {
                   <div className="bg-warning/10 p-3 rounded-lg">
                     <div className="flex items-center space-x-2 text-warning">
                       <Clock className="w-4 h-4" />
-                      <span className="text-sm font-medium">Token expires in 5 minutes</span>
+                      <span className="text-sm font-medium">Token expires in 45 seconds</span>
                     </div>
                   </div>
                 </div>
@@ -96,6 +96,12 @@ const RequestToken = () => {
       subtitle="Enter your email to receive a secure login token"
     >
       <div className="max-w-md mx-auto">
+        <div className='mx-auto p-4'>
+          <h3 className=''><span className='font-bold mr-2'>Student name:</span> <span>Etim, Ekuyik Udah</span></h3>
+          <p className='mt-4'><span className='font-bold mr-2'>Reg No:</span> <span>AKP/ASC/SWD/HND2023/0005</span></p>
+          <p className='mt-4'><span className='font-bold mr-2'>Topic:</span><span>Automated Clocking System</span></p>
+          <p className='mt-4 mb-4'><span className='font-bold mr-2'>Supervisor: </span><span>Prince Jimmy Okoko</span></p>
+        </div>
         <Card className="bg-gradient-card shadow-elevated">
           <CardHeader className="text-center">
             <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
@@ -131,7 +137,7 @@ const RequestToken = () => {
               <div className="text-center text-sm text-muted-foreground space-y-2">
                 <p className="flex items-center justify-center space-x-2">
                   <Clock className="w-4 h-4" />
-                  <span>Tokens expire after 5 minutes</span>
+                  <span>Tokens expire after 45 Seconds</span>
                 </p>
                 <p>For security, only registered staff emails are accepted</p>
               </div>

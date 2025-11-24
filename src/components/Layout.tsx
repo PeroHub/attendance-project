@@ -21,6 +21,7 @@ const Layout = ({ children, title, subtitle }: LayoutProps) => {
                 <h1 className="text-xl font-semibold text-foreground">Staff Attendance</h1>
                 <p className="text-sm text-muted-foreground">Professional Time Tracking</p>
               </div>
+              
             </div>
           </div>
         </div>
